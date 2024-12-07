@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import LoginScreen from '../screens/LoginScreen';
 import TransactionHistoryScreen from '../screens/TransactionHistoryScreen';
-// import TransactionDetailScreen from '../screens/TransactionDetailScreen';
+import TransactionDetailScreen from '../screens/TransactionDetailScreen';
 import { RootStackParamList } from '../types/RootStackParamList';
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -29,10 +29,10 @@ const AppNavigator: React.FC = () => {
           name="TransactionHistory"
           component={TransactionHistoryScreen}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           name="TransactionDetail"
           component={TransactionDetailScreen}
-        /> */}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

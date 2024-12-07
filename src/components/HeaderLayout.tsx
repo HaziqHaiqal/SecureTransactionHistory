@@ -41,23 +41,19 @@ const HeaderLayout: React.FC<HeaderLayoutProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    justifyContent: 'center',
     flexDirection: 'row',
     paddingHorizontal: 24,
     paddingBottom: 14,
     zIndex: 3,
   },
   headerMainElement: {
-    // flex: 1,
     color: WHITE,
     fontSize: 20,
     fontWeight: '600',
     lineHeight: 24,
   },
   headerSmallElement: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex: 1,
     height: 24,
     width: 24,
   },

@@ -7,25 +7,31 @@ import {
   Alert,
   SectionList,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import { Transaction } from '../types/Transaction';
-import { BLACK, ORANGE, GREEN, RED } from '../constant/colors';
+import { BLACK, ORANGE, GREEN, RED, WHITE } from '../constant/colors';
 import HeaderLayout from '../components/HeaderLayout';
-import { WHITE } from '../constant/colors';
 import { getTransactions } from '../data/transactions';
 import moment from 'moment';
+import { authenticateWithBiometrics } from '../utils/biometrics';
+import Assets from '../assets';
+import { NavigationProp } from '../types/RootStackParamList';
 
-const TransactionHistoryScreen: React.FC<{ navigation: any }> = ({
-  navigation,
-}) => {
+type Props = {
+  navigation: NavigationProp<'TransactionDetail'>;
+};
+
+const TransactionHistoryScreen = ({ navigation }: Props) => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [refreshing, setRefreshing] = useState(false);
+  const [showAmounts, setShowAmounts] = useState(false);
 
   useEffect(() => {
     loadTransactions();
   }, []);
 
-  const loadTransactions = async () => {
+  const loadTransactions = async (): Promise<void> => {
     try {
       const data = await getTransactions();
       setTransactions(data);
@@ -34,16 +40,26 @@ const TransactionHistoryScreen: React.FC<{ navigation: any }> = ({
     }
   };
 
-  const handleRefresh = async () => {
+  const handleRefresh = async (): Promise<void> => {
     setRefreshing(true);
     await loadTransactions();
     setRefreshing(false);
   };
 
-  const groupDataByDate = (data: Transaction[]) => {
+  const toggleAmountVisibility = async (): Promise<void> => {
+    const authenticated = await authenticateWithBiometrics();
+    if (authenticated) {
+      setShowAmounts(!showAmounts);
+    }
+  };
+
+  const groupDataByDate = (
+    data: Transaction[],
+  ): { title: string; data: Transaction[] }[] => {
     if (!data) {
       return [];
     }
+
     const result = groupBy(data, (transaction: Transaction) => {
       const date = moment(transaction.date);
       if (date.isSame(moment(), 'day')) {
@@ -54,6 +70,7 @@ const TransactionHistoryScreen: React.FC<{ navigation: any }> = ({
         return date.format('DD MMM YYYY');
       }
     });
+
     let formattedData: { title: string; data: Transaction[] }[] = [];
 
     Object.keys(result).forEach(key => {
@@ -66,28 +83,59 @@ const TransactionHistoryScreen: React.FC<{ navigation: any }> = ({
     return formattedData;
   };
 
-  const renderTxnHistoryContent = ({ item }: { item: Transaction }) => {
+  const renderTxnHistoryContent = ({
+    item,
+  }: {
+    item: Transaction;
+  }): JSX.Element => {
     return (
-      <TouchableOpacity style={styles.contentContainer}>
+      <TouchableOpacity
+        style={styles.contentContainer}
+        onPress={() =>
+          navigation.navigate('TransactionDetail', { transaction: item })
+        }>
         <View style={styles.trxHistoryDesc}>
           <Text style={styles.label}>{item?.description}</Text>
+          <Text style={styles.label}>
+            {moment(item.date).format('DD MMM YYYY')}
+          </Text>
         </View>
         <View style={styles.trxHistoryAmount}>
-          <Text
-            style={[
-              styles.label,
-              item?.type === 'credit' ? { color: RED } : { color: GREEN },
-            ]}>
-            {item?.type === 'credit'
-              ? `- ${item?.currency} ${item?.amount}`
-              : `${item?.currency} ${item?.amount}`}
-          </Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text
+              style={[
+                styles.label,
+                {
+                  color: showAmounts
+                    ? item?.type === 'credit'
+                      ? RED
+                      : GREEN
+                    : '#A9A9A9',
+                },
+              ]}>
+              {showAmounts
+                ? `${item?.type === 'credit' ? '-' : ''}${item?.currency} ${
+                    item?.amount
+                  }`
+                : 'RM *****'}
+            </Text>
+            <TouchableOpacity onPress={toggleAmountVisibility}>
+              <Image
+                source={Assets.icEyeClose}
+                style={{ marginLeft: 8, width: 20, height: 20 }}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       </TouchableOpacity>
     );
   };
 
-  const renderTxnHeader = ({ section: { title } }) => {
+  const renderTxnHeader = ({
+    section: { title },
+  }: {
+    section: { title: string };
+  }): JSX.Element => {
     return (
       <View style={styles.headerContainer}>
         <Text style={styles.headerLabel}>{title}</Text>
@@ -105,10 +153,12 @@ const TransactionHistoryScreen: React.FC<{ navigation: any }> = ({
         <SectionList
           sections={groupDataByDate(transactions)}
           keyExtractor={(item: Transaction, index: number) =>
-            item.id + index.toString()
+            item.transactionId + index.toString()
           }
           renderItem={renderTxnHistoryContent}
           renderSectionHeader={renderTxnHeader}
+          refreshing={refreshing}
+          onRefresh={handleRefresh}
         />
       </View>
     </>
@@ -137,8 +187,7 @@ const styles = StyleSheet.create({
     color: BLACK,
   },
   trxHistoryAmount: {
-    // textAlign: 'right',
-    // flex: 1,
+    justifyContent: 'center',
   },
 
   headerContainer: {

@@ -1,10 +1,11 @@
 import { StackNavigationProp } from '@react-navigation/stack';
+import { Transaction } from './Transaction';
 
 // Define the root stack param list
 export type RootStackParamList = {
   Login: undefined;
   TransactionHistory: undefined;
-  TransactionDetail: { transactionId: string };
+  TransactionDetail: { transaction: Transaction };
 };
 
 // Define a custom type for navigation prop in screen components

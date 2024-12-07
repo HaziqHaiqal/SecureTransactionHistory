@@ -2,7 +2,7 @@ import { Transaction } from '../types/Transaction';
 
 const transactions: Transaction[] = [
   {
-    id: '1',
+    transactionId: 'YTLSEA-12345',
     amount: 100.0,
     date: '2024-12-07',
     description: 'Groceries - Weekly grocery shopping',
@@ -12,7 +12,7 @@ const transactions: Transaction[] = [
     status: 'Completed',
   },
   {
-    id: '2',
+    transactionId: 'YTLSEA-67890',
     amount: 200.0,
     date: '2024-12-06',
     description: 'Restaurant - Dinner with friends',
@@ -22,7 +22,7 @@ const transactions: Transaction[] = [
     status: 'Completed',
   },
   {
-    id: '3',
+    transactionId: 'YTLSEA-54321',
     amount: 500.0,
     date: '2024-04-18',
     description: 'Salary Deposit - Monthly salary',
@@ -32,7 +32,7 @@ const transactions: Transaction[] = [
     status: 'Completed',
   },
   {
-    id: '4',
+    transactionId: 'YTLSEA-98765',
     amount: 80.0,
     date: '2024-04-14',
     description: 'Transportation',
@@ -42,7 +42,7 @@ const transactions: Transaction[] = [
     status: 'Completed',
   },
   {
-    id: '5',
+    transactionId: 'YTLSEA-11223',
     amount: 300.0,
     date: '2024-04-12',
     description: 'Shopping - Online shopping spree',
@@ -52,7 +52,7 @@ const transactions: Transaction[] = [
     status: 'Completed',
   },
   {
-    id: '6',
+    transactionId: 'YTLSEA-44556',
     amount: 120.0,
     date: '2024-04-10',
     description: 'Movie Tickets - Watched latest blockbuster',
@@ -62,7 +62,7 @@ const transactions: Transaction[] = [
     status: 'Completed',
   },
   {
-    id: '7',
+    transactionId: 'YTLSEA-77889',
     amount: 1000.0,
     date: '2024-04-08',
     description: 'Bonus - Quarterly performance bonus',
@@ -72,7 +72,7 @@ const transactions: Transaction[] = [
     status: 'Completed',
   },
   {
-    id: '8',
+    transactionId: 'YTLSEA-10112',
     amount: 150.0,
     date: '2024-04-06',
     description: 'Dinner with Friends - Casual dinner gathering',
@@ -82,7 +82,7 @@ const transactions: Transaction[] = [
     status: 'Completed',
   },
   {
-    id: '9',
+    transactionId: 'YTLSEA-13141',
     amount: 75.0,
     date: '2024-04-04',
     description: 'Coffee - Morning coffee break',
@@ -92,7 +92,7 @@ const transactions: Transaction[] = [
     status: 'Completed',
   },
   {
-    id: '10',
+    transactionId: 'YTLSEA-15161',
     amount: 600.0,
     date: '2024-04-02',
     description: 'Freelance Work - Completed freelance project',
@@ -102,7 +102,7 @@ const transactions: Transaction[] = [
     status: 'Completed',
   },
   {
-    id: '11',
+    transactionId: 'YTLSEA-17181',
     amount: 40.0,
     date: '2024-03-31',
     description: 'Books - Purchased new novel',
@@ -112,7 +112,7 @@ const transactions: Transaction[] = [
     status: 'Completed',
   },
   {
-    id: '12',
+    transactionId: 'YTLSEA-19202',
     amount: 250.0,
     date: '2024-03-29',
     description: 'Gym Membership - Monthly gym subscription',
@@ -122,7 +122,7 @@ const transactions: Transaction[] = [
     status: 'Completed',
   },
   {
-    id: '13',
+    transactionId: 'YTLSEA-21222',
     amount: 800.0,
     date: '2024-03-27',
     description: 'Investment Dividends - Received investment dividends',
@@ -132,7 +132,7 @@ const transactions: Transaction[] = [
     status: 'Completed',
   },
   {
-    id: '14',
+    transactionId: 'YTLSEA-23232',
     amount: 180.0,
     date: '2024-03-25',
     description: 'Home Utilities - Monthly utility bill payment',
@@ -142,7 +142,7 @@ const transactions: Transaction[] = [
     status: 'Completed',
   },
   {
-    id: '15',
+    transactionId: 'YTLSEA-25252',
     amount: 1200.0,
     date: '2024-03-23',
     description: 'Salary - Received monthly salary',
@@ -152,7 +152,7 @@ const transactions: Transaction[] = [
     status: 'Completed',
   },
   {
-    id: '16',
+    transactionId: 'YTLSEA-27272',
     amount: 90.0,
     date: '2024-03-21',
     description: 'Mobile Plan - Paid mobile plan bill',
@@ -162,7 +162,7 @@ const transactions: Transaction[] = [
     status: 'Completed',
   },
   {
-    id: '17',
+    transactionId: 'YTLSEA-29292',
     amount: 350.0,
     date: '2024-03-19',
     description: 'Weekend Getaway - Short vacation trip',
@@ -172,7 +172,7 @@ const transactions: Transaction[] = [
     status: 'Completed',
   },
   {
-    id: '18',
+    transactionId: 'YTLSEA-30303',
     amount: 480.0,
     date: '2024-03-17',
     description: 'Online Course - Enrolled in a coding course',
@@ -182,7 +182,7 @@ const transactions: Transaction[] = [
     status: 'Completed',
   },
   {
-    id: '19',
+    transactionId: 'YTLSEA-31313',
     amount: 700.0,
     date: '2024-03-15',
     description: 'Consultation Fee - Received consultation fee',
@@ -192,7 +192,7 @@ const transactions: Transaction[] = [
     status: 'Completed',
   },
   {
-    id: '20',
+    transactionId: 'YTLSEA-32323',
     amount: 55.0,
     date: '2024-03-13',
     description: 'Lunch - Office lunch break',
